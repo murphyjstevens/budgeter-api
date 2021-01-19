@@ -44,6 +44,8 @@ namespace BudgeterApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BudgeterApi v1"));
             }
 
+            app.UseCors(cors => cors.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost"));
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
