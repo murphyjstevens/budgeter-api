@@ -6,6 +6,7 @@ using BudgeterApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BudgeterApi.Mocks;
+using BudgeterApi.Repositories;
 
 namespace BudgeterApi.Controllers
 {
@@ -14,16 +15,18 @@ namespace BudgeterApi.Controllers
   public class CategoryController : ControllerBase
   {
     private readonly ILogger<CategoryController> _logger;
+    private readonly ICategoryRepository _repository;
 
-    public CategoryController(ILogger<CategoryController> logger)
+    public CategoryController(ILogger<CategoryController> logger, ICategoryRepository repository)
     {
         _logger = logger;
+        _repository = repository;
     }
 
     [HttpGet]
     public IEnumerable<Category> Get()
     {
-      return CategoryMock.Categories;
+      return _repository.Get();
     }
   }
 }

@@ -13,21 +13,21 @@ namespace BudgeterApi.Mocks
         Name = "Groceries",
         Budget = 500.52m,
         Spent = 25.22m,
-        GroupId = 1
+        CategoryGroupId = 1
       }, 
       new Category {
         Id = 2,
         Name = "Mortage",
         Budget = 2000.00m,
         Spent = 0.00m,
-        GroupId = 1
+        CategoryGroupId = 1
       }, 
       new Category {
         Id = 3,
         Name = "Dining Out",
         Budget = 111.00m,
         Spent = 10.00m,
-        GroupId = 2
+        CategoryGroupId = 2
       }
     };
   }
