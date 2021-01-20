@@ -6,6 +6,7 @@ using BudgeterApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BudgeterApi.Mocks;
+using BudgeterApi.Repositories;
 
 namespace BudgeterApi.Controllers
 {
@@ -14,17 +15,26 @@ namespace BudgeterApi.Controllers
   public class TransactionController : ControllerBase
   {
     private readonly ILogger<TransactionController> _logger;
+    private readonly ITransactionRepository _repository;
 
-    public TransactionController(ILogger<TransactionController> logger)
+    public TransactionController(ILogger<TransactionController> logger, ITransactionRepository repository)
     {
         _logger = logger;
+        _repository = repository;
     }
 
     [HttpGet]
     [Route("Account/{accountId}")]
-    public IEnumerable<Transaction> Get(int accountId)
+    public IEnumerable<Transaction> GetByAccount(int accountId)
     {
-      return TransactionMock.Transactions.Where(transaction => transaction.AccountId == accountId);
+      return _repository.GetByAccount(accountId);
+    }
+
+    [HttpGet]
+    [Route("Category/{categoryId}")]
+    public IEnumerable<Transaction> GetByCategory(int categoryId)
+    {
+      return _repository.GetByCategory(categoryId);
     }
   }
 }

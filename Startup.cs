@@ -35,6 +35,9 @@ namespace BudgeterApi
             });
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryGroupRepository, CategoryGroupRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
