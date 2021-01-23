@@ -15,7 +15,7 @@ namespace BudgeterApi.Mocks
         AccountId = 1, 
         Date = DateTime.Now, 
         Cost = 40.00m, 
-        To = "McDonalds", 
+        Recipient = "McDonalds", 
         CategoryId = 1 
       },
       new Transaction 
@@ -24,7 +24,7 @@ namespace BudgeterApi.Mocks
         AccountId = 1, 
         Date = DateTime.Now, 
         Cost = 12.23m, 
-        To = "Burger King", 
+        Recipient = "Burger King", 
         CategoryId = 1 
       },
       new Transaction 
@@ -33,7 +33,7 @@ namespace BudgeterApi.Mocks
         AccountId = 1, 
         Date = DateTime.Now, 
         Cost = 50.91m, 
-        To = "McDonalds", 
+        Recipient = "McDonalds", 
         CategoryId = 1 
       },
       new Transaction 
@@ -42,7 +42,7 @@ namespace BudgeterApi.Mocks
         AccountId = 1, 
         Date = DateTime.Now, 
         Cost = 5.11m, 
-        To = "McDonalds", 
+        Recipient = "McDonalds", 
         CategoryId = 1 
       },
       new Transaction 
@@ -51,7 +51,7 @@ namespace BudgeterApi.Mocks
         AccountId = 1, 
         Date = DateTime.Now, 
         Cost = 2980.82m, 
-        To = "Walmart", 
+        Recipient = "Walmart", 
         CategoryId = 1 
       },
       new Transaction 
@@ -60,7 +60,7 @@ namespace BudgeterApi.Mocks
         AccountId = 2, 
         Date = DateTime.Now, 
         Cost = 40.00m, 
-        To = "Cub Foods", 
+        Recipient = "Cub Foods", 
         CategoryId = 1 
       },
       new Transaction 
@@ -69,7 +69,7 @@ namespace BudgeterApi.Mocks
         AccountId = 2, 
         Date = DateTime.Now, 
         Cost = 12.23m, 
-        To = "KFC", 
+        Recipient = "KFC", 
         CategoryId = 1 
       }
     };

@@ -16,7 +16,7 @@ namespace BudgeterApi.Repositories
     {
       using (var connection = new NpgsqlConnection(ConnectionString)) {
         connection.Open();
-        return connection.Query<Account>("SELECT * FROM \"Accounts\"");
+        return connection.Query<Account>("SELECT * FROM accounts");
       }
     }
 
@@ -24,7 +24,7 @@ namespace BudgeterApi.Repositories
     {
       using (var connection = new NpgsqlConnection(ConnectionString)) {
         connection.Open();
-        return connection.QueryFirstOrDefault<Account>("SELECT * FROM \"Accounts\" WHERE \"Url\" = @Url", new { Url = url });
+        return connection.QueryFirstOrDefault<Account>("SELECT * FROM accounts WHERE url = @Url", new { Url = url });
       }
     }
   }

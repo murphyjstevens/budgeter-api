@@ -36,5 +36,26 @@ namespace BudgeterApi.Controllers
     {
       return _repository.GetByCategory(categoryId);
     }
+
+    [HttpPost]
+    [Route("")]
+    public Transaction Create(Transaction transaction)
+    {
+      return _repository.Create(transaction);
+    }
+
+    [HttpPut]
+    [Route("")]
+    public Transaction Update(Transaction transaction)
+    {
+      return _repository.Update(transaction);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public void Delete(int id)
+    {
+      _repository.Delete(id);
+    }
   }
 }

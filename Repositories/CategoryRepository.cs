@@ -12,6 +12,7 @@ namespace BudgeterApi.Repositories
   }
   public class CategoryRepository : CoreRepository, ICategoryRepository
   {
+    private const string RETURN_OBJECT = "id, name, budget, spent, category_group_id AS CategoryGroupId";
     private NpgsqlConnection _connection;
 
     public CategoryRepository()
@@ -24,7 +25,7 @@ namespace BudgeterApi.Repositories
     {
       using (var connection = new NpgsqlConnection(ConnectionString)) {
         connection.Open();
-        return connection.Query<Category>("SELECT * FROM \"Categories\"");
+        return connection.Query<Category>($"SELECT {RETURN_OBJECT} FROM categories");
       }
     }
 
