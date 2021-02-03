@@ -7,6 +7,7 @@ namespace BudgeterApi.Repositories
 {
   public interface ITransactionRepository
   {
+    IEnumerable<Transaction> Get();
     IEnumerable<Transaction> GetByAccount(int accountId);
     IEnumerable<Transaction> GetByCategory(int categoryId);
     Transaction Create(Transaction transaction);
@@ -16,6 +17,13 @@ namespace BudgeterApi.Repositories
   public class TransactionRepository : CoreRepository, ITransactionRepository
   {
     private const string TRANSACTION_SELECT = "id, account_id AS AccountId, date, cost, recipient, category_id AS CategoryId";
+    public IEnumerable<Transaction> Get()
+    {
+      using (var connection = new NpgsqlConnection(ConnectionString)) {
+        connection.Open();
+        return connection.Query<Transaction>($"SELECT {TRANSACTION_SELECT} FROM transactions");
+      }
+    }
     public IEnumerable<Transaction> GetByAccount(int accountId)
     {
       using (var connection = new NpgsqlConnection(ConnectionString)) {
@@ -36,7 +44,7 @@ namespace BudgeterApi.Repositories
     {
       using (var connection = new NpgsqlConnection(ConnectionString)) {
         connection.Open();
-        string sql = $@"INSERT INTO transactions VALUES (id, account_id, date, cost, recipient, category_id) 
+        string sql = $@"INSERT INTO transactions (id, account_id, date, cost, recipient, category_id) 
         VALUES (@Id, @AccountId, @Date, @Cost, @Recipient, @CategoryId)
         RETURNING {TRANSACTION_SELECT}";
         return connection.QueryFirstOrDefault<Transaction>(sql, transaction);

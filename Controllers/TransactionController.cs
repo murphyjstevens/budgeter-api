@@ -24,6 +24,13 @@ namespace BudgeterApi.Controllers
     }
 
     [HttpGet]
+    [Route("")]
+    public IEnumerable<Transaction> Get()
+    {
+      return _repository.Get();
+    }
+
+    [HttpGet]
     [Route("Account/{accountId}")]
     public IEnumerable<Transaction> GetByAccount(int accountId)
     {
