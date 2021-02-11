@@ -28,5 +28,11 @@ namespace BudgeterApi.Controllers
     {
       return _repository.Get();
     }
+
+    [HttpGet]
+    [Route("Simple")]
+    public IEnumerable<Category> GetSimple() {
+      return _repository.GetSimple();
+    }
   }
 }
