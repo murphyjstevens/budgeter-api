@@ -9,17 +9,13 @@ namespace BudgeterApi.Repositories
   {
     IEnumerable<Category> Get();
     IEnumerable<Category> GetSimple();
+    Category Create(Category category);
+    Category Update(Category category);
+    void Delete(int id);
   }
   public class CategoryRepository : CoreRepository, ICategoryRepository
   {
     private const string RETURN_OBJECT = "id, name, budget, category_group_id AS CategoryGroupId";
-    private NpgsqlConnection _connection;
-
-    public CategoryRepository()
-    {
-      _connection = new NpgsqlConnection(ConnectionString);
-      _connection.Open();
-    }
 
     public IEnumerable<Category> Get()
     {
@@ -40,9 +36,35 @@ GROUP BY c.id, c.name, c.budget, c.category_group_id");
       }
     }
 
-    public void Dispose()
+    public Category Create(Category category)
     {
-      _connection?.Dispose();
+      using (var connection = new NpgsqlConnection(ConnectionString)) {
+        connection.Open();
+        string sql = $@"INSERT INTO categories (id, name, budget, category_group_id) 
+        VALUES (@Id, @Name, @Budget, @CategoryGroupId)
+        RETURNING {RETURN_OBJECT}";
+        return connection.QueryFirstOrDefault<Category>(sql, category);
+      }
+    }
+
+    public Category Update(Category category)
+    {
+      using (var connection = new NpgsqlConnection(ConnectionString)) {
+        connection.Open();
+        string sql = $@"UPDATE categories
+        SET name = @Name, budget = @Budget, category_group_id = @CategoryGroupId
+        WHERE id = @Id
+        RETURNING {RETURN_OBJECT}";
+        return connection.QueryFirstOrDefault<Category>(sql, category);
+      }
+    }
+
+    public void Delete(int id) {
+      using (var connection = new NpgsqlConnection(ConnectionString)) {
+        connection.Open();
+        string sql = @"DELETE FROM categories WHERE id = @Id";
+        connection.Execute(sql, new { Id = id });
+      }
     }
   }
 }

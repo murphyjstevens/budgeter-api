@@ -31,8 +31,28 @@ namespace BudgeterApi.Controllers
 
     [HttpGet]
     [Route("Simple")]
-    public IEnumerable<Category> GetSimple() {
+    public IEnumerable<Category> GetSimple()
+    {
       return _repository.GetSimple();
+    }
+
+    [HttpPost]
+    public Category Create(Category category)
+    {
+      return _repository.Create(category);
+    }
+
+    [HttpPut]
+    public Category Update(Category category)
+    {
+      return _repository.Update(category);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public void Delete(int id)
+    {
+      _repository.Delete(id);
     }
   }
 }
